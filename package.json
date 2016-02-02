@@ -5,6 +5,7 @@
   "dependencies": {
     "brfs": "^1.4.3",
     "d3-layout-timeline": "^1.0.2",
+    "jquery": "^2.2.0",
     "js-yaml": "^3.5.2",
     "lodash": "^4.2.0"
   },

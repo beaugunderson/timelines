@@ -3,14 +3,26 @@
 var d3 = require('d3');
 var fs = require('fs');
 var yaml = require('js-yaml');
+var $ = require('jquery');
 var _ = require('lodash');
 
 d3.layout.timeline = require('./vendor/d3.layout.timeline.js');
 
 var types = [
-  'Presidents', 'Year Decades', 'Years', 'Life Decades', 'Addresses',
-  'People', 'Relationships', 'Computers', 'IM', 'Websites', 'Schools',
-  'Jobs', 'Twitter bots', 'Trips'
+  'Presidents',
+  'Year Decades',
+  'Years',
+  'Life Decades',
+  'Addresses',
+  'People',
+  'Relationships',
+  'Computers',
+  'IM',
+  'Websites',
+  'Schools',
+  'Jobs',
+  'Twitter bots',
+  'Trips'
 ];
 
 // TODO: gradients for estimated times
@@ -18,22 +30,22 @@ var types = [
 // TODO: add x axis
 // TODO: add hiding of lanes
 // TODO: add y panning
+// TODO: snap x axis to day boundary so there are no gaps?
 
 var colorScale = d3.scale.ordinal()
   .domain(types)
   .range(['#ccc', '#999']);
 
-var WIDTH = 1220;
+var WIDTH = $('svg').width();
 
 var timeline = d3.layout.timeline()
   .size([WIDTH, 200])
-  .extent(['12/27/1981', '1/24/2017'])
+  .extent(['12/27/1981', new Date()])
   .padding(3)
   .maxBandHeight(24);
 
 var data = {
   Addresses: yaml.safeLoad(fs.readFileSync('./timelines/addresses.yml', 'utf8')),
-  // Areas: yaml.safeLoad(fs.readFileSync('./timelines/areas.yml', 'utf8')),
   Computers: yaml.safeLoad(fs.readFileSync('./timelines/computers.yml', 'utf8')),
   People: yaml.safeLoad(fs.readFileSync('./timelines/people.yml', 'utf8')),
   IM: yaml.safeLoad(fs.readFileSync('./timelines/im.yml', 'utf8')),
@@ -118,7 +130,7 @@ d3.select('svg')
   }));
 
 types.forEach(function (type) {
-  data[type] = data[type].filter(d => {
+  data[type] = data[type].map(d => {
     if (d.end === 'present') {
       d.end = new Date();
     }
@@ -126,24 +138,13 @@ types.forEach(function (type) {
     return d;
   });
 
-  data[type] = data[type].filter(d => {
-    return d.start && d.end;
-  });
+  data[type] = data[type].filter(d => d.start && d.end);
 
-  var bands = timeline(data[type]);
-
-  bands = _.sortBy(bands, 'start');
-
-  // console.log(bands);
-
+  var bands = _(timeline(data[type])).sortBy('start').value();
   var offset = lastHeight;
   var lowest = _.maxBy(bands, 'y');
 
   lastHeight += lowest.y + lowest.dy + 2;
-
-  // console.log(type, lastHeight);
-
-  // laneCounter += lanes;
 
   var g = d3.select('svg')
     .append('g')
