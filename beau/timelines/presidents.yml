@@ -1,0 +1,20 @@
+---
+- name: Ronald Reagan
+  start: 1/20/1981
+  end: 1/19/1989
+
+- name: George H.W. Bush
+  start: 1/20/1989
+  end: 1/19/1993
+
+- name: Bill Clinton
+  start: 1/20/1993
+  end: 1/19/2001
+
+- name: George W. Bush
+  start: 1/20/2001
+  end: 1/19/2009
+
+- name: Barack Obama
+  start: 1/20/2009
+  end: present

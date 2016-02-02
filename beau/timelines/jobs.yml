@@ -1,0 +1,123 @@
+---
+- name: Mervyn's
+  start:
+  end:
+  type: employee
+
+- name: Compucare
+  start:
+  end:
+  type: employee
+
+- name: GMA Research
+  start:
+  end:
+  type: employee
+
+- name: Molly Brown
+  start:
+  end:
+  type: freelance
+
+- name: Crocker Group/MGT
+  shortName: Crocker Group
+  start: 1/1/2000
+  end: 5/1/2004
+  type: freelance
+
+- name: Ferox Technologies
+  start:
+  end:
+  type: freelance
+
+- name: Overlake Hospital
+  start:
+  end:
+  type: employee
+
+- name: Borders Books
+  start:
+  end:
+  type: employee
+
+- name: GeeksOnTime
+  start:
+  end:
+  type: freelance
+
+- name: Northwest Computer Resources
+  start: 5/1/1999
+  end: 1/1/2009
+  type: freelance
+
+- name: Abercrombie & Fitch
+  start:
+  end:
+  type: employee
+
+- name: Cello Technologies
+  start:
+  end:
+  type: employee
+
+- name: Cingular Corporate
+  start:
+  end:
+  type: temporary
+
+- name: Zoic Studios
+  shortName: Zoic
+  start: 7/1/2005
+  end: 7/31/2006
+  type: employee
+
+- name: Beau Gunderson Consulting
+  start:
+  end:
+  type: freelance
+
+- name: Necessary Nomad Films
+  shortName: Necessary Nomads
+  start: 1/1/2004
+  end: 12/1/2007
+  type: freelance
+
+- name: Isilon Systems, Inc.
+  shortName: Isilon
+  start: 8/1/2006
+  end: 12/15/2007
+  type: employee
+
+- name: By Land and Sea
+  start: 12/27/2007
+  end: 7/2/2008
+  type: employee
+
+- name: Costco Corporate
+  shortName: Costco
+  start: 01/01/2009
+  end: 6/30/2009
+  type: employee
+
+- name: Synapse Product Design
+  shortName: Synapse
+  start: 7/1/2009
+  end: 4/13/2012
+  type: employee
+
+- name: Singly
+  start: 5/7/2012
+  end: 4/1/2013
+  type: employee
+
+- name: Practice Fusion
+  shortName: PF
+  start: 6/1/2013
+  end: 6/30/2014
+  type: employee
+
+- name: PersonalGenomes.org
+  shortName: PGP
+  start: 7/1/2014
+  end: present
+  type: employee

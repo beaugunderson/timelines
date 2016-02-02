@@ -1,0 +1,21 @@
+---
+- name: 386 DX 40
+  start: 6/1/1992
+  end: 6/1/1994
+  # picture online shows AMI BIOS with 1986-1990 dates
+
+- name: 486
+  start:
+  end:
+
+- name: Core 2 Duo
+  start:
+  end:
+
+- name: ToughBook CF-52
+  start: 12/14/2007
+  end: 3/25/2014
+
+- name: rMBP
+  start: 6/15/2012
+  end: present

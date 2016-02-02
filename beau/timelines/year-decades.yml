@@ -1,0 +1,16 @@
+---
+- name: 1980s
+  start: 1/1/1980
+  end: 12/31/1989
+
+- name: 1990s
+  start: 1/1/1990
+  end: 12/31/1999
+
+- name: 2000s
+  start: 1/1/2000
+  end: 12/31/2009
+
+- name: 2010s
+  start: 1/1/2010
+  end: present

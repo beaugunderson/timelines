@@ -1,0 +1,36 @@
+---
+- name: Kelly
+  start: 8/30/1997
+  end: 8/30/2001
+
+- name: Caryn
+  start: 9/1/2001
+  end: 7/26/2002
+
+- name: Sandy
+  start: 7/1/2006
+  end: 11/1/2006
+
+- name: Sandy
+  start: 6/15/2007
+  end: 1/11/2008
+
+- name: Celene
+  start: 6/1/2009
+  end: 8/24/2009
+
+- name: Lauren
+  start: 10/1/2009
+  end: 4/1/2010
+
+- name: Laura
+  start: 4/16/2010
+  end: 9/31/2013
+
+- name: Erika
+  start: 3/15/2014
+  end: 9/15/2014
+
+- name: Caryn
+  start: 10/31/2014
+  end: present

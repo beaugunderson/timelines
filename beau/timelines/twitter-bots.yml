@@ -1,0 +1,40 @@
+---
+- name: "@vaporfave"
+  start: 10/5/2014
+  end: present
+
+- name: "@plzrevisit"
+  start: 9/30/2014
+  end: 12/8/2014
+
+- name: "@theseraps"
+  start: 10/9/2014
+  end: present
+
+- name: "@___said"
+  start: 10/13/2014
+  end: present
+
+- name: "@allnothings"
+  start: 11/10/2014
+  end: present
+
+- name: "@notquoteright"
+  start: 11/13/2014
+  end: present
+
+- name: "@snailsnake"
+  start: 4/24/2015
+  end: present
+
+- name: "@lindenmoji"
+  start: 11/14/2015
+  end: present
+
+- name: "@catsnacks"
+  start: 1/30/2016
+  end: present
+
+- name: "@ocean_voyages"
+  start:
+  end: present

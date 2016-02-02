@@ -1,0 +1,105 @@
+---
+- name: Bellevue House
+  shortName: Bellevue
+  description: The green house in Crossroads
+  start: 12/27/1982
+  end: 12/1/1983
+  state: WA
+
+- name: Ames' Lake
+  start: 12/2/1983
+  end: 1/1/1987
+  sources:
+    start: Warranty deed at Washington public records
+  state: WA
+
+- name: 3827 134TH AVE NE
+  shortName: Bridle Trails
+  address: 3827 134TH AVE NE, Bellevue, WA 98005
+  start: 1/2/1987
+  end: 8/30/2003
+  state: WA
+
+# split this into separate rooms? couch, garage, katie, own room?
+- name: Keith's House
+  shortName: Keith's
+  address: 4410 335TH PL SE, Fall City, WA 98024
+  start: 9/1/2003
+  end: 7/31/2005
+  state: WA
+
+- name: South Pasadena (Seth's couch)
+  shortName: Seth's couch
+  description: South Pasadena, CA
+  start: 8/1/2005
+  end: 8/31/2005
+  state: CA
+
+- name: Koreatown
+  shortName: K-town
+  description: 808 S Hobart BLVD, Los Angeles, CA
+  start: 9/1/2005
+  end: 8/31/2006
+  state: CA
+
+- name: Keith's Mom's House
+  shortName: Keith's
+  description: Fall City, WA
+  start: 9/1/2006
+  end: 10/19/2006
+  state: WA
+
+- name: Keith's Bellevue House
+  shortName: Keith's
+  description: 1838 172ND PL NE, Bellevue, WA 98008
+  start: 10/20/2006
+  end: 12/26/2007
+  state: WA
+
+- name: Traveling
+  shortName: Travel
+  start: 12/27/2007
+  end: 7/2/2008
+  state: None
+
+- name: Keith's Bellevue House
+  shortName: Keith's
+  description: 1838 172ND PL NE, Bellevue, WA 98008
+  start: 7/3/2008
+  end: 4/30/2009
+  state: WA
+
+- name: The Broadview Mansion
+  shortName: Broadview
+  description: 1230 NW 121ST ST, Seattle, WA
+  start: 5/1/2009
+  end: 3/26/2011
+  state: WA
+
+- name: The Beau/Jesse Bellevue house
+  shortName: Beau/Jesse
+  description: 17225 NE 115TH PL, Bellevue, WA
+  start: 3/27/2011
+  end: 5/26/2012
+  state: WA
+
+# - name: The Singly office
+- name: SOMA apartment
+  shortName: SOMA
+  description: 120A Langton ST, San Francisco, CA
+  start: 5/28/2012
+  end: 2/28/2013
+  state: CA
+
+- name: Washington Square
+  shortName: WA Square
+  description: 10610 NE 9TH PL, Bellevue, WA 98004
+  start: 3/4/2013
+  end: 8/15/2014
+  state: WA
+
+- name: Viktoria
+  description: 1915 2ND AVE, Seattle, WA 98101
+  start: 8/16/2014
+  end: present
+  state: WA

@@ -1,0 +1,43 @@
+---
+- name: IRC
+  start: 11/01/1996
+  end: 5/9/2012
+
+- name: IRCCloud
+  start: 5/10/2012
+  end: present
+
+- name: AIM (b3aub3au)
+  start: 12/13/2001
+  end: 12/26/2004
+
+- name: AIM (beau fou homme)
+  start: 12/27/2004
+  end: 6/12/2011
+
+- name: Yahoo (beau_gunderson)
+  start: 8/17/2005
+  end: 9/29/2010
+
+- name: MSN (beau@nwcr.net)
+  shortName: MSN
+  start: 8/17/2005
+  end: 12/19/2006
+
+- name: MSN (beau@beaugunderson.com)
+  start: 12/20/2006
+  end: 6/12/2011
+
+- name: Google Talk
+  start: 2/16/2006
+  end: present
+
+- name: Brozone HipChat
+  shortName: Brozone
+  start: 3/25/2013
+  end: 3/13/2015
+
+- name: Brozone Slack
+  shortName: Slack
+  start: 3/14/2015
+  end: present

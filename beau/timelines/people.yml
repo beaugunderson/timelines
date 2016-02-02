@@ -1,0 +1,36 @@
+---
+- name: Beau Gunderson
+  start: 12/27/1982
+  end: present
+
+- name: Caryn Stewart
+  start: 8/8/1984
+  end: present
+
+- name: Boyd Gunderson
+  start: 5/1/1960
+  end: present
+
+- name: Jennifer Gunderson
+  start: 7/1/1960
+  end: present
+
+- name: Bill Stewart
+  start: 6/17/1946
+  end: present
+
+- name: Leo Gunderson
+  start: 9/17/1932
+  end: 2/24/2008
+
+- name: Margo Reinsch
+  start: 6/4/1926
+  end: 1/27/2008
+
+- name: Bud Reinsch
+  start: 7/8/1913
+  end: 9/7/1992
+
+- name: Janet Bricker
+  start: 3/19/1934
+  end: 9/27/1987

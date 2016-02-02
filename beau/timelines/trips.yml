@@ -1,0 +1,63 @@
+---
+- name: CHADD conference
+  shortName: CHADD
+  location: New Orleans, LA
+  start: 11/11/2015
+  end: 11/15/2015
+
+- name: Europe
+  start: 9/6/2015
+  end: 9/29/2015
+
+- name: Huntington Beach
+  start: 7/2/2015
+  end: 7/5/2015
+
+- name: CascadiaJS
+  start: 7/8/2015
+  end: 7/10/2015
+
+- name: Virginia Beach
+  shortName: VA Beach
+  start: 7/15/2015
+  end: 7/19/2015
+
+- name: Pollock Pines
+  start: 6/25/2015
+  end: 6/28/2015
+
+- name: SF (QS, NodeConf)
+  start: 6/10/2015
+  end: 6/20/2015
+
+- name: Las Vegas
+  start: 5/8/2015
+  end: 5/10/2015
+
+- name: San Diego
+  start: 5/11/2015
+  end: 5/15/2015
+
+- name: SF
+  start: 5/16/2015
+  end: 5/17/2015
+
+- name: Oregon
+  start: 4/26/2015
+  end: 4/27/2015
+
+- name: Huntington Beach
+  start: 3/26/2015
+  end: 3/30/2015
+
+- name: Eugene
+  start: 3/15/2015
+  end: 3/16/2015
+
+- name: Peru
+  start: 2/7/2015
+  end: 2/15/2015
+
+- name: Huntington Beach
+  start: 12/31/2014
+  end: 1/4/2015

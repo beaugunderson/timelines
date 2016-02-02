@@ -1,0 +1,21 @@
+---
+- name: Tolt Hill
+  start: 9/1/1985
+  end: 6/20/1987
+
+- name: Absorbent Minds Montessori School
+  shortName: Minds
+  start: 9/1/1987
+  end: 6/20/1988
+
+- name: Cherry Crest Elementary
+  start: 9/1/1988
+  end: 6/20/1993
+
+- name: Odle Middle School
+  start: 9/1/1993
+  end: 6/20/1997
+
+- name: Sammamish High School
+  start: 9/1/1997
+  end: 6/20/2001
