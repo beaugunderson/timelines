@@ -2,11 +2,40 @@
 
 var d3 = require('d3');
 var fs = require('fs');
+var moment = require('moment');
 var yaml = require('js-yaml');
 var $ = require('jquery');
 var _ = require('lodash');
 
 d3.layout.timeline = require('./vendor/d3.layout.timeline.js');
+
+function makeYears() {
+  var years = [];
+
+  for (var i = 1900; i < 2100; i++) {
+    years.push({
+      name: String(i),
+      start: new Date(`1/1/${i}`),
+      end: new Date(`12/31/${i}`)
+    });
+  }
+
+  return years;
+}
+
+function makeDecades() {
+  var decades = [];
+
+  for (var i = 1900; i < 2100; i += 10) {
+    decades.push({
+      name: i + 's',
+      start: new Date(`1/1/${i}`),
+      end: new Date(`12/31/${i + 9}`)
+    });
+  }
+
+  return decades;
+}
 
 var types = [
   'Presidents',
@@ -26,10 +55,7 @@ var types = [
 ];
 
 // TODO: gradients for estimated times
-// TODO: add vertical line that follows mouse
-// TODO: add x axis
 // TODO: add hiding of lanes
-// TODO: add y panning
 // TODO: snap x axis to day boundary so there are no gaps?
 
 var colorScale = d3.scale.ordinal()
@@ -37,10 +63,14 @@ var colorScale = d3.scale.ordinal()
   .range(['#ccc', '#999']);
 
 var WIDTH = $('svg').width();
+var HEIGHT = $('svg').height();
+
+var START = new Date('12/27/1982');
+var END = new Date();
 
 var timeline = d3.layout.timeline()
   .size([WIDTH, 200])
-  .extent(['12/27/1981', new Date()])
+  .extent([START, END])
   .padding(3)
   .maxBandHeight(24);
 
@@ -57,8 +87,8 @@ var data = {
   'Twitter bots': yaml.safeLoad(fs.readFileSync('./timelines/twitter-bots.yml', 'utf8')),
   Schools: yaml.safeLoad(fs.readFileSync('./timelines/schools.yml', 'utf8')),
   Websites: yaml.safeLoad(fs.readFileSync('./timelines/websites.yml', 'utf8')),
-  'Year Decades': yaml.safeLoad(fs.readFileSync('./timelines/year-decades.yml', 'utf8')),
-  Years: yaml.safeLoad(fs.readFileSync('./timelines/years.yml', 'utf8'))
+  'Year Decades': makeDecades(),
+  Years: makeYears()
 };
 
 var textColors = {
@@ -90,44 +120,80 @@ window.data = data;
 
 var lastHeight = 0;
 
-var x = d3.scale.linear()
-  .domain([0, WIDTH])
+var x = d3.time.scale()
+  .domain([START, END])
   .range([0, WIDTH]);
 
-var labels = [];
-var bandShapes = [];
+var y = d3.scale.linear()
+  .domain([0, HEIGHT])
+  .range([0, HEIGHT]);
+
+var labelSelectors = [];
+var bandSelectors = [];
+var timelineLabelSelectors = [];
 
 function labelX(d) {
-  if (x(d.start) < 0 && x(d.end) > 75 + this.getComputedTextLength()) {
-    return 75;
+  if (x(d.originalStart) < 0 &&
+      x(d.originalEnd) > 175 + this.getComputedTextLength()) {
+    return 175;
   }
 
-  return (x(d.start) + x(d.end)) / 2;
+  return (x(d.originalStart) + x(d.originalEnd)) / 2;
 }
 
 function labelOpacity(d) {
-  return (x(d.end) - x(d.start)) > this.getComputedTextLength() ? 1 : 0;
+  return (x(d.originalEnd) - x(d.originalStart)) >
+    this.getComputedTextLength() ? 1 : 0;
 }
 
-d3.select('svg')
-  .call(d3.behavior.zoom().x(x).scaleExtent([-1, 500]).on('zoom', () => {
-    bandShapes.forEach(bandShape => {
-      bandShape.attr('x', d => x(d.start));
-      bandShape.attr('width', d => x(d.end) - x(d.start));
-    });
+var lastY = 0;
 
-    labels.forEach(label => {
-      label.attr('x', labelX);
-      label.style('opacity', labelOpacity);
-      label.style('text-anchor', d => {
-        if (x(d.start) < 0) {
-          return 'start';
-        }
+var zoom = d3.behavior.zoom()
+  .x(x)
+  .scaleExtent([-1, 500])
+  .size([WIDTH, HEIGHT]);
 
-        return 'middle';
-      }, 'important');
-    });
-  }));
+zoom.on('zoom', () => {
+  var translateY;
+
+  axisElement.call(axis);
+
+  // this code disables y-axis zoom in a kludge-y way
+  if (d3.event.sourceEvent.type === 'mousemove') {
+    translateY = d3.event.translate[1];
+    lastY = translateY;
+  } else {
+    translateY = lastY;
+    zoom.translate([d3.event.translate[0], translateY]);
+  }
+
+  bandSelectors.forEach(selector => {
+    selector.attr('x', d => x(d.originalStart));
+    selector.attr('y', d => y(d.y + translateY));
+    selector.attr('width', d => x(d.originalEnd) - x(d.originalStart));
+  });
+
+  labelSelectors.forEach(selector => {
+    selector.attr('x', labelX);
+    selector.attr('y', d => y(d.y + 5 + translateY + (d.dy / 2)));
+    selector.style('opacity', labelOpacity);
+    selector.style('text-anchor', d => {
+      if (x(d.originalStart) < 0) {
+        return 'start';
+      }
+
+      return 'middle';
+    }, 'important');
+  });
+
+  timelineLabelSelectors.forEach((selector, i) => {
+    selector.attr('y', y(18 + offsets[i] + translateY));
+  });
+});
+
+var svg = d3.select('svg').call(zoom);
+
+var offsets = [];
 
 types.forEach(function (type) {
   data[type] = data[type].map(d => {
@@ -144,21 +210,21 @@ types.forEach(function (type) {
   var offset = lastHeight;
   var lowest = _.maxBy(bands, 'y');
 
+  offsets.push(offset);
+
   lastHeight += lowest.y + lowest.dy + 2;
 
-  var g = d3.select('svg')
-    .append('g')
-      .attr('transform', `translate(100,${offset})`);
+  var g = svg.append('g')
+    .attr('transform', `translate(0,${offset})`);
 
   var b = g.selectAll('rect')
     .data(bands)
     .enter()
       .append('rect')
-      // .attr('rx', 2)
-      .attr('x', d => x(d.start))
-      .attr('y', d => d.y)
+      .attr('x', d => x(d.originalStart))
+      .attr('y', d => y(d.y))
       .attr('height', d => d.dy)
-      .attr('width', d => x(d.end) - x(d.start))
+      .attr('width', d => x(d.originalEnd) - x(d.originalStart))
       .style('fill', d => {
         if (scales[type]) {
           return scales[type].scale(d[scales[type].attribute]);
@@ -181,23 +247,80 @@ types.forEach(function (type) {
       .text(d => d.shortName || d.name)
       .attr('class', 'label')
       .attr('x', labelX)
-      .attr('y', d => d.y + 5 + (d.dy / 2))
+      .attr('y', d => y(d.y) + 5 + (y(d.dy) / 2))
       .style('fill', () => {
         return textColors[type] || 'black';
       })
       .style('pointer-events', 'none')
-      .style('text-anchor', d => x(d.start) < 0 ? 'start' : 'middle')
+      .style('text-anchor', d => x(d.originalStart) < 0 ? 'start' : 'middle')
       .style('font-family', 'Avenir Next Condensed')
       .style('font-size', '12px')
       .style('opacity', labelOpacity);
 
-  bandShapes.push(b);
-  labels.push(l);
+  bandSelectors.push(b);
+  labelSelectors.push(l);
 
-  d3.select('svg')
-    .append('text')
+  var t = svg.append('text')
     .text(type)
-    .attr('y', 18 + offset)
+    .attr('y', y(18 + offset))
     .attr('x', 20)
     .style('font-family', 'Avenir');
+
+  timelineLabelSelectors.push(t);
+});
+
+var axis = d3.svg.axis()
+  .scale(x)
+  .orient('top');
+
+svg.append('rect')
+  .attr('y', HEIGHT - 50)
+  .attr('width', WIDTH)
+  .attr('height', 50)
+  .attr('fill', 'white')
+  .attr('fill-opacity', 0.8);
+
+var axisElement = svg.append('g')
+  .attr('class', 'axis')
+  .attr('transform', `translate(0, ${HEIGHT})`)
+  .call(axis);
+
+var line = svg.append('line')
+  .attr('class', 'mouse-line')
+  .attr('y1', y.range()[0])
+  .attr('y2', y.range()[1])
+  .attr('stroke', 'black');
+
+var label = svg.append('text')
+  .attr('class', 'mouse-label')
+  .style('fill', 'black')
+  .style('font-size', '14px')
+  .style('font-family', 'Avenir');
+
+svg.on('mousemove', function () {
+  var time = x.invert(d3.mouse(this)[0]);
+  var mouseX = x(time);
+
+  var domain = axis.scale().domain();
+
+  var start = moment(domain[0]);
+  var end = moment(domain[1]);
+
+  var difference = end.diff(start, 'days', true);
+
+  if (difference > 365) {
+    label.text(moment(time).format('MMMM YYYY'));
+  } else if (difference > 28) {
+    label.text(moment(time).format('MMMM Do YYYY'));
+  } else {
+    label.text(moment(time).format('MMMM Do YYYY, h:mm:ss a'));
+  }
+
+  label
+    .attr('x', mouseX + 10)
+    .attr('y', HEIGHT - 30);
+
+  line
+    .attr('x1', mouseX)
+    .attr('x2', mouseX);
 });
