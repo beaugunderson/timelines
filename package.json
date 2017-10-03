@@ -12,7 +12,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "cd beau && budo timeline.js --open --live -- -t brfs"
+    "start": "budo timeline.js --open --live -- -t brfs"
   },
   "author": "Beau Gunderson <beau@beaugunderson.com> (https://beaugunderson.com/)",
   "license": "MIT"
