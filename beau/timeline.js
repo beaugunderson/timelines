@@ -7,7 +7,7 @@ var yaml = require('js-yaml');
 var $ = require('jquery');
 var _ = require('lodash');
 
-d3.layout.timeline = require('./vendor/d3.layout.timeline.js');
+require('d3-layout-timeline');
 
 function makeYears() {
   var years = [];
@@ -125,6 +125,7 @@ var scales = {
 };
 
 window.data = data;
+window.d3 = d3;
 
 var lastHeight = 0;
 
@@ -166,6 +167,9 @@ zoom.on('zoom', () => {
 
   axisElement.call(axis);
 
+  // update the label scale when we zoom in/out
+  updateLabel(d3.mouse(svg[0][0])[0]);
+
   // this code disables y-axis zoom in a kludge-y way
   if (d3.event.sourceEvent.type === 'mousemove') {
     translateY = d3.event.translate[1];
@@ -185,18 +189,13 @@ zoom.on('zoom', () => {
     selector.attr('x', labelX);
     selector.attr('y', d => y(d.y + 5 + translateY + (d.dy / 2)));
     selector.style('opacity', labelOpacity);
-    selector.style('text-anchor', d => {
-      if (x(d.originalStart) < 0) {
-        return 'start';
-      }
-
-      return 'middle';
-    }, 'important');
+    selector.style('text-anchor',
+      d => x(d.originalStart) < 0 ? 'start' : 'middle',
+      'important');
   });
 
-  timelineLabelSelectors.forEach((selector, i) => {
-    selector.attr('y', y(18 + offsets[i] + translateY));
-  });
+  timelineLabelSelectors.forEach(
+    (selector, i) => selector.attr('y', y(18 + offsets[i] + translateY)));
 });
 
 var svg = d3.select('svg').call(zoom);
@@ -256,9 +255,7 @@ types.forEach(function (type) {
       .attr('class', 'label')
       .attr('x', labelX)
       .attr('y', d => y(d.y) + 5 + (y(d.dy) / 2))
-      .style('fill', () => {
-        return textColors[type] || 'black';
-      })
+      .style('fill', () => textColors[type] || 'black')
       .style('pointer-events', 'none')
       .style('text-anchor', d => x(d.originalStart) < 0 ? 'start' : 'middle')
       .style('font-family', 'Avenir Next Condensed')
@@ -305,9 +302,9 @@ var label = svg.append('text')
   .style('font-size', '14px')
   .style('font-family', 'Avenir');
 
-svg.on('mousemove', function () {
-  var time = x.invert(d3.mouse(this)[0]);
-  var mouseX = x(time);
+function updateLabel(mouseX) {
+  var time = x.invert(mouseX);
+  var timeX = x(time);
 
   var domain = axis.scale().domain();
 
@@ -325,10 +322,14 @@ svg.on('mousemove', function () {
   }
 
   label
-    .attr('x', mouseX + 10)
+    .attr('x', timeX + 10)
     .attr('y', HEIGHT - 30);
 
   line
-    .attr('x1', mouseX)
-    .attr('x2', mouseX);
+    .attr('x1', timeX)
+    .attr('x2', timeX);
+}
+
+svg.on('mousemove', function () {
+  updateLabel(d3.mouse(this)[0]);
 });

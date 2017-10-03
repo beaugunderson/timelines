@@ -10,12 +10,15 @@ html, body {
 svg {
   height: 100vh;
   width: 100vw;
-  background: white;
+
+  max-height: 100%;
+  max-width: 100%;
+
+  overflow-y: hidden;
 }
 
-div.viz {
-  height: 1300px;
-  width: 1300px;
+svg {
+  background: white;
 }
 
 svg * {
