@@ -1,0 +1,36 @@
+---
+- name: "Android G1"
+  start: 9/24/2008
+  end: 2/2/2010
+
+- name: "iPhone 3GS"
+  start: 2/3/2010
+  end: 8/23/10
+
+- name: "iPhone 4"
+  start: 8/24/10
+  end: 9/20/2012
+
+# - name "iPhone 4S"
+#   start:
+#   end:
+
+- name: "iPhone 5"
+  start: 9/21/2012
+  end: 9/26/2013
+
+- name: "iPhone 5S"
+  start: 9/27/2013
+  end: 9/23/2014
+
+- name: "iPhone 6"
+  start: 9/24/2014
+  end: 9/30/2015
+
+- name: "iPhone 6S"
+  start: 10/1/2015
+  end: 10/24/2016
+
+- name: "iPhone 7"
+  start: 10/25/2016
+  end: present

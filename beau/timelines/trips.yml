@@ -1,4 +1,10 @@
 ---
+- name: By Land and Sea
+  shortName: BLaS
+  location: Central America
+  start: 1/1/2008
+  end: 6/15/2008
+
 - name: CHADD conference
   shortName: CHADD
   location: New Orleans, LA
@@ -61,3 +67,35 @@
 - name: Huntington Beach
   start: 12/31/2014
   end: 1/4/2015
+
+- name: Hong Kong & Cambodia
+  start: 11/2/2016
+  end: 11/19/2016
+
+- name: Boat delivery
+  start: 4/29/2016
+  end: 5/22/2016
+
+- name: CascadiaJS
+  start: 8/2/2016
+  end: 8/6/2016
+
+- name: Las Vegas
+  start: 9/22/2016
+  end: 9/25/2016
+
+- name: Los Angeles
+  start: 10/6/2016
+  end: 10/10/2016
+
+- name: GET Conference
+  start: 4/24/2016
+  end: 4/27/2016
+
+- name: San Diego
+  start: 4/1/2016
+  end: 4/9/2016
+
+- name: San Diego
+  start: 2/5/2016
+  end: 2/8/2016

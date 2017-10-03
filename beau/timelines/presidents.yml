@@ -17,4 +17,8 @@
 
 - name: Barack Obama
   start: 1/20/2009
+  end: 1/19/2017
+
+- name: Donald Trump
+  start: 1/20/2017
   end: present

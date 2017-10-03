@@ -44,8 +44,10 @@ var types = [
   'Life Decades',
   'Addresses',
   'People',
+  'Boat',
   'Relationships',
   'Computers',
+  'Phones',
   'IM',
   'Websites',
   'Schools',
@@ -75,8 +77,11 @@ var timeline = d3.layout.timeline()
   .maxBandHeight(24);
 
 var data = {
+  // TODO: load these all automatically; specify key in YAML?
   Addresses: yaml.safeLoad(fs.readFileSync('./timelines/addresses.yml', 'utf8')),
+  Boat: yaml.safeLoad(fs.readFileSync('./timelines/boat.yml', 'utf8')),
   Computers: yaml.safeLoad(fs.readFileSync('./timelines/computers.yml', 'utf8')),
+  Phones: yaml.safeLoad(fs.readFileSync('./timelines/phones.yml', 'utf8')),
   People: yaml.safeLoad(fs.readFileSync('./timelines/people.yml', 'utf8')),
   IM: yaml.safeLoad(fs.readFileSync('./timelines/im.yml', 'utf8')),
   Jobs: yaml.safeLoad(fs.readFileSync('./timelines/jobs.yml', 'utf8')),
@@ -87,6 +92,8 @@ var data = {
   'Twitter bots': yaml.safeLoad(fs.readFileSync('./timelines/twitter-bots.yml', 'utf8')),
   Schools: yaml.safeLoad(fs.readFileSync('./timelines/schools.yml', 'utf8')),
   Websites: yaml.safeLoad(fs.readFileSync('./timelines/websites.yml', 'utf8')),
+
+  // auto-generated
   'Year Decades': makeDecades(),
   Years: makeYears()
 };
@@ -95,12 +102,13 @@ var textColors = {
   Presidents: 'white'
 };
 
+// TODO: add scales to the YAML files?
 var scales = {
   Presidents: {
     attribute: 'name',
     scale: d3.scale.ordinal()
       .domain(_.map(data.Presidents, 'name'))
-      .range(['#e91d0e', '#e91d0e', '#232066', '#e91d0e', '#232066'])
+      .range(['#e91d0e', '#e91d0e', '#232066', '#e91d0e', '#232066', '#e91d0e'])
   },
   Jobs: {
     attribute: 'type',

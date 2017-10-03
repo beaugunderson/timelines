@@ -1,0 +1,23 @@
+---
+# - name: Baba 35
+#   start: 1/1/1985
+#   end: present
+
+- name: Reverie (Frank Crezee)
+  shortName: Reverie
+  start: 1/1/1985
+  end: 12/2/2009
+
+- name: Carlita's Altar (Jonathan L. Henze)
+  shortName: Carlita's Altar
+  start: 12/3/2009
+  end: 4/1/2013
+
+- name: Moana Makani (Calvin Hastings)
+  shortName: Moana Makani
+  start: 4/2/2013
+  end: 3/1/2016
+
+- name: Emmylou
+  start: 3/2/2016
+  end: present

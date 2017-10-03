@@ -89,6 +89,7 @@
   type: employee
 
 - name: By Land and Sea
+  shortName: BLaS
   start: 12/27/2007
   end: 7/2/2008
   type: employee
@@ -119,5 +120,11 @@
 - name: PersonalGenomes.org
   shortName: PGP
   start: 7/1/2014
+  end: 9/30/2016
+  type: employee
+
+- name: Canvas Medical
+  shortName: Canvas
+  start: 10/3/2016
   end: present
   type: employee

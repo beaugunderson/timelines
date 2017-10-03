@@ -16,6 +16,10 @@
   start: 12/14/2007
   end: 3/25/2014
 
-- name: rMBP
+- name: rMBP (mid-2012)
   start: 6/15/2012
+  end: 11/21/2016
+
+- name: rMBP (2016)
+  start: 11/21/2016
   end: present
