@@ -113,5 +113,10 @@
 - name: s/v Emmylou
   description: Our boat!
   start: 5/20/2016
+  end: 2/28/2019
+  state: WA
+
+- name: Cypress
+  start: 3/1/2019
   end: present
   state: WA

@@ -22,4 +22,8 @@
 
 - name: rMBP (2016)
   start: 11/21/2016
+  end: 11/26/2018
+
+- name: rMBP (2018)
+  start: 11/27/2018
   end: present

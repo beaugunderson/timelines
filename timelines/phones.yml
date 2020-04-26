@@ -1,4 +1,8 @@
 ---
+- name: "Various Nokias"
+  start: 1/1/1999
+  end: 9/23/2008
+
 - name: "Android G1"
   start: 9/24/2008
   end: 2/2/2010
@@ -33,4 +37,13 @@
 
 - name: "iPhone 7"
   start: 10/25/2016
+  end: 9/20/2018
+
+- name: "iPhone XS"
+  start: 9/21/2018
+  end: 9/25/2019
+
+- name: "iPhone 11"
+  shortName: "11"
+  start: 9/26/2019
   end: present
