@@ -1,0 +1,8 @@
+---
+- name: Iraq War combat
+  start: 2003-03-19
+  end: 2003-05-01
+
+- name: COVID-19
+  start: 1/21/2020
+  end: present

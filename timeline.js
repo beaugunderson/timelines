@@ -9,6 +9,20 @@ var _ = require('lodash');
 
 require('d3-layout-timeline');
 
+function makeAgeYears() {
+  var years = [];
+
+  for (var i = 1982; i < 2082; i++) {
+    years.push({
+      name: String(i - 1982),
+      start: new Date(`12/27/${i}`),
+      end: new Date(`12/26/${i + 1}`)
+    });
+  }
+
+  return years;
+}
+
 function makeYears() {
   var years = [];
 
@@ -39,9 +53,11 @@ function makeDecades() {
 
 var types = [
   'Presidents',
+  'World Events',
   'Year Decades',
   'Years',
   'Life Decades',
+  'Age Years',
   'Lifespan',
   'Addresses',
   'People',
@@ -94,9 +110,11 @@ var data = {
   'Twitter bots': yaml.safeLoad(fs.readFileSync('./timelines/twitter-bots.yml', 'utf8')),
   Schools: yaml.safeLoad(fs.readFileSync('./timelines/schools.yml', 'utf8')),
   Websites: yaml.safeLoad(fs.readFileSync('./timelines/websites.yml', 'utf8')),
+  'World Events': yaml.safeLoad(fs.readFileSync('./timelines/world-events.yml', 'utf8')),
 
   // auto-generated
   'Year Decades': makeDecades(),
+  'Age Years': makeAgeYears(),
   Years: makeYears()
 };
 
@@ -229,40 +247,40 @@ types.forEach(function (type) {
   var b = g.selectAll('rect')
     .data(bands)
     .enter()
-      .append('rect')
-      .attr('x', d => x(d.originalStart))
-      .attr('y', d => y(d.y))
-      .attr('height', d => d.dy)
-      .attr('width', d => x(d.originalEnd) - x(d.originalStart))
-      .style('fill', d => {
-        if (scales[type]) {
-          return scales[type].scale(d[scales[type].attribute]);
-        }
+    .append('rect')
+    .attr('x', d => x(d.originalStart))
+    .attr('y', d => y(d.y))
+    .attr('height', d => d.dy)
+    .attr('width', d => x(d.originalEnd) - x(d.originalStart))
+    .style('fill', d => {
+      if (scales[type]) {
+        return scales[type].scale(d[scales[type].attribute]);
+      }
 
-        return colorScale(type);
-      })
-      .style('stroke', 'black')
-      .style('stroke-width', 1);
-      // .on('mouseover', (d, di) => {
-      //   g.selectAll('text.label')
-      //     .style('opacity', (p, pi) => pi === di ? 1 : 0);
-      // })
-      // .on('mouseout', () => d3.selectAll('text.label').style('opacity', 0));
+      return colorScale(type);
+    })
+    .style('stroke', 'black')
+    .style('stroke-width', 1);
+  // .on('mouseover', (d, di) => {
+  //   g.selectAll('text.label')
+  //     .style('opacity', (p, pi) => pi === di ? 1 : 0);
+  // })
+  // .on('mouseout', () => d3.selectAll('text.label').style('opacity', 0));
 
   var l = g.selectAll('text.label')
     .data(bands)
     .enter()
-      .append('text')
-      .text(d => d.shortName || d.name)
-      .attr('class', 'label')
-      .attr('x', labelX)
-      .attr('y', d => y(d.y) + 5 + (y(d.dy) / 2))
-      .style('fill', () => textColors[type] || 'black')
-      .style('pointer-events', 'none')
-      .style('text-anchor', d => x(d.originalStart) < 0 ? 'start' : 'middle')
-      .style('font-family', 'Avenir Next Condensed')
-      .style('font-size', '12px')
-      .style('opacity', labelOpacity);
+    .append('text')
+    .text(d => d.shortName || d.name)
+    .attr('class', 'label')
+    .attr('x', labelX)
+    .attr('y', d => y(d.y) + 5 + (y(d.dy) / 2))
+    .style('fill', () => textColors[type] || 'black')
+    .style('pointer-events', 'none')
+    .style('text-anchor', d => x(d.originalStart) < 0 ? 'start' : 'middle')
+    .style('font-family', 'Avenir Next Condensed')
+    .style('font-size', '12px')
+    .style('opacity', labelOpacity);
 
   bandSelectors.push(b);
   labelSelectors.push(l);

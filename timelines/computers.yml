@@ -26,4 +26,8 @@
 
 - name: rMBP (2018)
   start: 11/27/2018
+  end: 12/2/2019
+
+- name: rMBP 16" (2019)
+  start: 12/3/2019
   end: present
