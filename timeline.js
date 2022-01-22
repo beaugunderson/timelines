@@ -61,6 +61,7 @@ var types = [
   'Lifespan',
   'Addresses',
   'People',
+  'Pets',
   'Boat',
   'Relationships',
   'Computers',
@@ -104,6 +105,7 @@ var data = {
   Jobs: yaml.safeLoad(fs.readFileSync('./timelines/jobs.yml', 'utf8')),
   'Life Decades': yaml.safeLoad(fs.readFileSync('./timelines/life-decades.yml', 'utf8')),
   'Lifespan': yaml.safeLoad(fs.readFileSync('./timelines/lifespan.yml', 'utf8')),
+  Pets: yaml.safeLoad(fs.readFileSync('./timelines/pets.yml', 'utf8')),
   Presidents: yaml.safeLoad(fs.readFileSync('./timelines/presidents.yml', 'utf8')),
   Relationships: yaml.safeLoad(fs.readFileSync('./timelines/relationships.yml', 'utf8')),
   Trips: yaml.safeLoad(fs.readFileSync('./timelines/trips.yml', 'utf8')),
@@ -128,7 +130,7 @@ var scales = {
     attribute: 'name',
     scale: d3.scale.ordinal()
       .domain(_.map(data.Presidents, 'name'))
-      .range(['#e91d0e', '#e91d0e', '#232066', '#e91d0e', '#232066', '#e91d0e'])
+      .range(['#e91d0e', '#e91d0e', '#232066', '#e91d0e', '#232066', '#e91d0e', '#232066'])
   },
   Jobs: {
     attribute: 'type',

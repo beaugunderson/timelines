@@ -118,5 +118,15 @@
 
 - name: Cypress
   start: 3/1/2019
-  end: present
+  end: 11/1/2020
   state: WA
+
+- name: Huntington Beach
+  start: 11/5/2020
+  end: 10/27/2021
+  state: CA
+
+- name: RV
+  start: 10/28/2021
+  end: present
+  state: Mobile
